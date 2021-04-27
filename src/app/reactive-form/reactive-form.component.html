@@ -1,0 +1,77 @@
+<h1 class="title">Exam/Projet Angular : Formulaire réactif</h1>
+
+<!-- Création du Formulaire -->
+<div class="container">
+  <form [formGroup]="formulaire" (ngSubmit)="submit()">
+    <div>
+      <label class="col-25">Prénom :</label>
+      <input class="col-75" type="text" formControlName="prenom" placeholder="Jean">
+      <span *ngIf="!prenom?.valid && prenom?.touched">Prenom is not valid</span>
+    </div>
+
+    <div>
+      <label class="col-25">Nom :</label>
+      <input class="col-75" type="text" formControlName="nom"  placeholder="Depond">
+      <span *ngIf="!nom?.valid  && nom?.touched">Nom is not valid</span>
+    </div>
+
+    <div>
+      <label class="col-25">Email :</label>
+      <input class="col-75" type="text" formControlName="email"  placeholder="jd@orange.fr">
+      <span *ngIf="!email?.valid  && email?.touched">Email is not valid</span>
+    </div>
+
+    <div>
+      <label class="col-25">Âge :</label>
+      <input class="col-75" type="number" min=0 formControlName="age"  placeholder="41">
+      <span *ngIf="!age?.valid  && age?.touched">Age is not valid</span>
+    </div>
+    <button type="submit">Enregistrer</button>
+  </form>
+
+<button class="clear" type="submit" (click)="clear()">Clear form</button>
+
+</div>
+
+<div class="informations" *ngIf="premierSubmit">
+
+  <!-- Résumé des dernières informations soumise au formulaire -->
+  <div class="resume DI" *ngIf="formulaireEnvoyee">
+    <h1>Résumé :</h1>
+    <p>Je s'appelle pas groot je s'appelle {{prenom?.value}} {{nom?.value}}.</p>
+    <p>Groot {{age?.value}} groot.</p>
+    <p>Et si vous souhaitez me joindre envoyez moi un mail à {{email?.value}}.</p>
+  </div>
+
+  <!-- Tableau de toutes les informations soumise au formulaire -->
+  <div class="table DI" style="float:right">
+    <table>
+      <caption>Liste des utilisateurs</caption>
+      <thead>
+        <tr>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Âge</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let utilisateur of utilisateurs">
+          <td>
+            {{utilisateur.prenom}}
+          </td>
+          <td>
+            {{utilisateur.nom}}
+          </td>
+          <td>
+            {{utilisateur.email}}
+          </td>
+          <td>
+            {{utilisateur.age}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
